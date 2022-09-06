@@ -1,0 +1,72 @@
+from machine import Pin
+from utime import sleep, sleep_ms
+import random
+dato1=random.randint(1,5)
+dato2=random.randint(1,4)
+led1= Pin(15,Pin.OUT)
+led2= Pin(2,Pin.OUT)
+led3= Pin(4,Pin.OUT)
+led4= Pin(16,Pin.OUT)
+led5= Pin(17,Pin.OUT)
+led6= Pin(5,Pin.OUT)
+led7= Pin(18,Pin.OUT)
+led8= Pin(19,Pin.OUT)
+led9= Pin(22,Pin.OUT)
+led10= Pin(23,Pin.OUT)
+leds = [led1,led2,led3,led4,led5,led6,led7,led8,led9,led10]
+lisall = [led9,led3,led2,led10,led1,led8,led5,led4,led6,led7]
+boton1= Pin(13,Pin.IN, Pin.PULL_UP)
+boton2= Pin(12,Pin.IN, Pin.PULL_UP)
+boton3= Pin(32,Pin.IN, Pin.PULL_UP)
+boton4= Pin(27,Pin.IN, Pin.PULL_UP)
+
+print("primer dato:",dato1)
+print("Segundo dato:",dato2)
+
+suma=dato1+dato2
+if suma==7:
+  print(lisall)
+else:
+  print(leds)
+
+def ida():
+  for i in leds:
+    i.value(1)
+    sleep_ms(50)
+    i.value(0)
+    sleep(0.05)
+def regreso():
+  for i in reversed(leds):
+    i.value(1)
+    sleep(0.05)
+    i.value(0)
+    sleep(0.05)
+
+def azar():
+  for i in lisall:
+    i.value(0)
+    sleep(0.5)
+    i.value(3)
+    sleep(0.05)
+def azarregreso():
+  for i in reversed(lisall):
+    i.value(1)
+    sleep(0.05)
+    i.value(0)
+    sleep(0.05)
+
+while True:
+    if (boton1.value()==0 and boton1.value()==1):
+      ida()
+      print ("boton1")
+    if (boton2.value()==0):
+      regreso()
+      print ("boton2")
+
+    if (boton3.value()==0):
+      print ("boton3")
+      azar()
+
+    if (boton4.value()==0):
+      print ("boton4")
+      azarregreso()
